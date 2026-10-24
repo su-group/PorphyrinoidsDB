@@ -1,0 +1,9 @@
+# Reproducible Mordred descriptor environment.
+# Keep this separate from training/SHAP: Mordred 1.2.0 requires NumPy 1.x
+# and NetworkX 2.x; NetworkX 2.3 is needed for Detour descriptors.
+numpy==1.23.5
+pandas==1.5.3
+networkx==2.3
+mordred==1.2.0
+rdkit==2024.3.5
+six==1.17.0

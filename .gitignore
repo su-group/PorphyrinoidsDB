@@ -1,0 +1,33 @@
+# Scratch space used by several analysis scripts (see analysis/README.md).
+# Nothing in .dsh_tmp/ is a deliverable; the shipped artifacts live in experiments/ and reports/.
+.dsh_tmp/
+runnability/
+
+# Decompressed fingerprint cache: rebuild it from the committed .xz.
+#   python -c "import lzma,shutil; shutil.copyfileobj(lzma.open('data/Data-20261012_raw_features_fp.csv.xz','rb'), open('data/Data-20261012_raw_features_fp.csv','wb'))"
+data/Data-20261012_raw_features_fp.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+pytest-cache-files-*
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Editors and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local run output written by the pipeline when --output-root points here
+/DEFAULT/

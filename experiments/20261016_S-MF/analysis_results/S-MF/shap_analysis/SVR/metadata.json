@@ -1,0 +1,1 @@
+{"unit": "eV", "expected_value": 6.156655367240261, "source_rows": [1375, 568, 492, 1279, 53, 654, 1506, 69, 891, 889, 1449, 918, 873, 1156, 749, 607, 1598, 945, 1401, 1208, 514, 1320, 1795, 802, 1356, 1247, 982, 78, 1088, 1005], "shap_mode": "standalone (pipeline steps 9-11 replayed after S-MF was stopped)"}

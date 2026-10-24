@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, data or trained models, please cite this repository."
+title: "PorScaDB-ML: predicting DFT HOMO-LUMO gaps of porphyrinoids and benchmarking scaffold extrapolation"
+abstract: >-
+  A machine-learning pipeline that predicts DFT HOMO-LUMO gaps of porphyrinoid
+  macrocycles from 2D descriptors and RDKit fingerprints, together with a
+  controlled benchmark of ten regressors across three data-splitting axes
+  (random, meso-substituent, macrocyclic scaffold) and two feature sets.
+authors:
+  - family-names: "Zhang"
+    given-names: "Chengwei"
+date-released: "2026-10-24"
+license: MIT
+keywords:
+  - porphyrinoid
+  - HOMO-LUMO gap
+  - molecular descriptors
+  - scaffold split
+  - extrapolation
+  - SHAP
+  - scikit-learn
+version: "1.0.0"
+repository-code: "https://github.com/Laughableomputers/PorScaDB-ML"

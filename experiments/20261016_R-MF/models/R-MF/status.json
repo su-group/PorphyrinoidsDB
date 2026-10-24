@@ -1,0 +1,18 @@
+{
+  "run_name": "R-MF",
+  "phase": "complete",
+  "updated_at": "2026-10-17T19:22:05.924946",
+  "best_model": "SVR",
+  "completed_models": [
+    "Lasso",
+    "ElasticNet",
+    "SVR",
+    "KernelRidge",
+    "KNeighbors",
+    "DecisionTree",
+    "RandomForest",
+    "XGBoost",
+    "LightGBM",
+    "GaussianProcess"
+  ]
+}

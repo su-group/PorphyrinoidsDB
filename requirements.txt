@@ -1,0 +1,3 @@
+# Training/SHAP dependencies. Use environment-ml.yml (Python 3.12).
+# Mordred feature generation belongs to environment-features.yml (Python 3.8).
+-r requirements-ml.txt

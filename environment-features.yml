@@ -1,0 +1,8 @@
+name: porscadb-features
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - -r requirements-features.txt

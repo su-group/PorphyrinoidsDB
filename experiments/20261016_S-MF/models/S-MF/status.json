@@ -1,0 +1,20 @@
+{
+  "run_name": "S-MF",
+  "phase": "complete",
+  "updated_at": "2026-10-17T19:33:32.076551",
+  "model": null,
+  "completed_models": [
+    "Lasso",
+    "ElasticNet",
+    "SVR",
+    "KernelRidge",
+    "KNeighbors",
+    "DecisionTree",
+    "RandomForest",
+    "XGBoost",
+    "LightGBM",
+    "GaussianProcess"
+  ],
+  "best_model": "SVR",
+  "note": "GP was stopped by hand at 39/100 trials on 2026-10-17, then the Optuna search was resumed to the full 100-trial budget and the best trial (CV MSE 1.213568) was refit and evaluated on 2026-10-21; phase promoted to complete after that evaluation."
+}

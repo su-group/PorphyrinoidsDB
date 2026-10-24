@@ -1,0 +1,18 @@
+{
+  "run_name": "B-M",
+  "phase": "complete",
+  "updated_at": "2026-10-21T22:50:53.404489",
+  "best_model": "KNeighbors",
+  "completed_models": [
+    "Lasso",
+    "ElasticNet",
+    "SVR",
+    "KernelRidge",
+    "KNeighbors",
+    "DecisionTree",
+    "RandomForest",
+    "XGBoost",
+    "LightGBM",
+    "GaussianProcess"
+  ]
+}

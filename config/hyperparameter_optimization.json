@@ -1,0 +1,52 @@
+{
+    "Lasso": {
+        "alpha": {"type": "float", "low": 0.001, "high": 10, "log": true},
+        "max_iter": {"type": "int", "low": 1000, "high": 10000}
+    },
+    "SVR": {
+        "C": {"type": "float", "low": 0.01, "high": 1000, "log": true},
+        "gamma": {"type": "float", "low": 1e-05, "high": 0.2, "log": true},
+        "epsilon": {"type": "float", "low": 0.001, "high": 1, "log": true}
+    },
+    "KernelRidge": {
+        "alpha": {"type": "float", "low": 1e-05, "high": 1000, "log": true},
+        "gamma": {"type": "float", "low": 1e-05, "high": 0.2, "log": true}
+    },
+    "KNeighbors": {
+        "n_neighbors": {"type": "int", "low": 1, "high": 20},
+        "weights": {"type": "categorical", "choices": ["uniform", "distance"]},
+        "algorithm": {"type": "categorical", "choices": ["auto", "ball_tree", "kd_tree", "brute"]}
+    },
+    "DecisionTree": {
+        "max_depth": {"type": "int", "low": 1, "high": 20},
+        "min_samples_split": {"type": "int", "low": 2, "high": 20},
+        "min_samples_leaf": {"type": "int", "low": 1, "high": 10}
+    },
+    "RandomForest": {
+        "n_estimators": {"type": "int", "low": 10, "high": 200},
+        "max_depth": {"type": "int", "low": 1, "high": 20},
+        "min_samples_split": {"type": "int", "low": 2, "high": 20},
+        "min_samples_leaf": {"type": "int", "low": 1, "high": 10}
+    },
+    "XGBoost": {
+        "n_estimators": {"type": "int", "low": 10, "high": 200},
+        "max_depth": {"type": "int", "low": 1, "high": 10},
+        "learning_rate": {"type": "float", "low": 0.01, "high": 0.3, "log": true},
+        "subsample": {"type": "float", "low": 0.5, "high": 1.0}
+    },
+    "ElasticNet": {
+        "alpha": {"type": "float", "low": 0.001, "high": 10, "log": true},
+        "l1_ratio": {"type": "float", "low": 0.01, "high": 0.99},
+        "max_iter": {"type": "int", "low": 1000, "high": 10000}
+    },
+    "LightGBM": {
+        "n_estimators": {"type": "int", "low": 10, "high": 200},
+        "max_depth": {"type": "int", "low": 1, "high": 10},
+        "learning_rate": {"type": "float", "low": 0.01, "high": 0.3, "log": true},
+        "subsample": {"type": "float", "low": 0.5, "high": 1.0},
+        "num_leaves": {"type": "int", "low": 10, "high": 100}
+    },
+    "GaussianProcess": {
+        "alpha": {"type": "float", "low": 1e-10, "high": 1e-2, "log": true}
+    }
+}

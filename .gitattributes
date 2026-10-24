@@ -1,0 +1,31 @@
+# Byte-level rules. Order matters: the last matching pattern wins.
+#
+# 1. Documentation and source are plain text.
+*.md text
+*.cff text
+*.yml text
+*.yaml text
+*.txt text
+*.py text
+*.svg text
+
+# 2. Archives and binary artifacts.
+*.xz binary
+*.7z binary
+*.pkl binary
+*.npy binary
+*.sqlite3 binary
+*.png binary
+*.jpg binary
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.zip binary
+
+# 3. Verbatim bytes. The data files are stored with CRLF line endings and the
+#    pipeline's cache manifests compare exact bytes, so git must not normalise them.
+#    Generated result tables under experiments/ are also compared byte for byte.
+data/** -text
+*_raw_features.csv -text
+*_raw_features.csv.meta.json -text
+experiments/** -text

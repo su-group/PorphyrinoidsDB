@@ -31,3 +31,6 @@ desktop.ini
 
 # Local run output written by the pipeline when --output-root points here
 /DEFAULT/
+
+# Generated analysis tables and figures
+/analysis_outputs/

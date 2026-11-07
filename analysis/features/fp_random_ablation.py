@@ -119,14 +119,11 @@ for cfg, keep in CONFIGS.items():
         sys.stdout.flush()
     del built
 
-out = ['# 指纹在随机划分下的折内消融', '',
-       '口径与 `指纹-骨架折内消融.md` 完全一致（同模型、同超参、同合并指标），便于并排对照。',
-       '折位置取自 `experiments\\20261016_R-M\\models\\R-M\\prepared_data.pkl`；',
-       '锚点：仅 Mordred 的 Lasso 合并 CV MSE = 0.270594（管线上报 0.270567）。', '',
-       '| 特征配置 | 原始列数 | 折内保留 | 模型 | 合并 CV MSE | 合并 CV R² | fold-R² 均值 |',
-       '|---|---|---|---|---|---|---|']
-for cfg, raw, kept, mname, cv, r2, fold_r2 in rows:
-    out.append('| %s | %d | %d | %s | %.4f | %+.4f | %+.4f |'
-               % (cfg, raw, kept, mname, cv, r2, fold_r2))
-Path('.dsh_tmp/runnability/指纹-随机折内消融.md').write_text('\n'.join(out) + '\n', encoding='utf-8')
-print('\nwrote .dsh_tmp/runnability/指纹-随机折内消融.md')
+output = Path('analysis_outputs/features/random_ablation.csv')
+output.parent.mkdir(parents=True, exist_ok=True)
+import csv
+with output.open('w', encoding='utf-8-sig', newline='') as stream:
+    writer = csv.writer(stream)
+    writer.writerow(['config', 'raw_cols', 'kept_fold0', 'model', 'pooled_cv_mse', 'pooled_cv_r2', 'fold_r2_mean'])
+    writer.writerows(rows)
+print(output)

@@ -13,20 +13,45 @@ PorScaDB-ML 根据卟啉及相关大环分子的 SMILES 预测其 DFT HOMO–LUM
 - `core/`：数据处理、分子特征、实验设置与模型训练代码。
 - `data/`：分子数据和结构文件。
 - `experiments/`：模型文件和实验输出。
-- `analysis/`、`reports/`：分析脚本、图表和结果摘要。
+- `analysis/results/`：结果汇总与实验比较。
+- `analysis/features/`：特征消融与 SHAP 分析。
 - `run_pipeline.py`：运行单组建模实验。
 - `run_experiments.py`：批量运行多组实验。
 
 ## 环境配置
 
-特征生成与模型训练使用不同的 Conda 环境：
+先安装 Miniconda 或 Anaconda。在仓库根目录（包含 `run_pipeline.py` 的文件夹）运行以下命令。
+
+| 环境 | Python | 用途 |
+|---|---|---|
+| `porscadb-ml` | 3.12 | 模型训练、特征消融、SHAP 和绘图 |
+| `porscadb-features` | 3.8 | Mordred 分子特征生成 |
+
+创建并激活训练环境：
+
+```bash
+conda env create -f environment-ml.yml
+conda activate porscadb-ml
+```
+
+需要计算分子特征时，创建并激活另一个环境：
 
 ```bash
 conda env create -f environment-features.yml
-conda env create -f environment-ml.yml
+conda activate porscadb-features
 ```
 
-Python 版本和依赖项见对应的环境文件。
+环境文件会自动安装对应 `requirements-*.txt` 中的依赖。训练和绘图时，用 `conda activate porscadb-ml` 切回训练环境。
+
+汇总已有实验结果并生成 SHAP 图片：
+
+```bash
+conda activate porscadb-ml
+python analysis/results/summarize.py
+python analysis/features/summarize_shap.py --plot
+```
+
+两个汇总脚本仅导出 CSV 时只需 Python 标准库；输出 PNG 还需要 Matplotlib。
 
 ## 运行
 
@@ -46,8 +71,8 @@ python run_pipeline.py path/to/features.csv \
   --output-root experiments/example
 ```
 
-数据、实验输出和分析脚本的详细说明见 [`data/README.md`](data/README.md)、[`experiments/README.md`](experiments/README.md) 和 [`analysis/README.md`](analysis/README.md)。
+数据字段、实验输出和分析脚本的说明见 [`data/README.md`](data/README.md)、[`experiments/README.md`](experiments/README.md) 和 [`analysis/README.md`](analysis/README.md)。
 
-## 引用与许可
+## 许可
 
-如使用本项目，请按 [`CITATION.cff`](CITATION.cff) 中的信息引用。代码采用 [MIT 许可证](LICENSE)。
+代码采用 [MIT 许可证](LICENSE)。

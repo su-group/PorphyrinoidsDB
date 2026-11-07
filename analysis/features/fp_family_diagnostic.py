@@ -131,15 +131,15 @@ def main():
         print(f'\n=== {name}: {len(cols)} raw columns ===', flush=True)
         all_out[name] = {'ncols': len(cols), 'models': evaluate(name, df[cols], y, folds)}
 
-    lines = []
-    for name, info in all_out.items():
-        for model_name, rec in info['models'].items():
-            lines.append(f'{name:14s} {info["ncols"]:5d}raw {model_name:16s} '
-                         f'CVMSE={np.mean(rec["mse"]):.4f} CVR2={np.mean(rec["r2"]):.4f} '
-                         f'kept={np.mean(rec["nfeat"]):.0f} fit={np.mean(rec["sec"]):.1f}s')
-    text = '\n'.join(lines)
-    Path('.dsh_tmp/fp_family_diagnostic.txt').write_text(text, encoding='utf-8')
-    print('\n' + text)
+    rows = []
+    for config, info in all_out.items():
+        for model, rec in info['models'].items():
+            for fold, (mse, r2, nfeat, seconds) in enumerate(zip(rec['mse'], rec['r2'], rec['nfeat'], rec['sec']), 1):
+                rows.append(dict(config=config, model=model, fold=fold, raw_cols=info['ncols'], kept=nfeat, mse=mse, r2=r2, seconds=seconds))
+    output = Path('analysis_outputs/features/family_ablation.csv')
+    output.parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(rows).to_csv(output, index=False, encoding='utf-8-sig')
+    print(output)
 
 
 if __name__ == '__main__':

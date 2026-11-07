@@ -32,7 +32,7 @@ DATA = 'data/Data-20261012.csv'
 SPLITS = 'experiments/20261013_R-M/splits.json'
 FP = '.dsh_tmp/fp-full/Data-20261012_raw_features_fp.csv'
 FAMILIES = ('Morgan', 'MACCS', 'AtomPair', 'TopoTorsion', 'RDKitFP')
-OUT = Path('.dsh_tmp/runnability/指纹-骨架折内消融.md')
+OUT = Path('analysis_outputs/features/scaffold_ablation.csv')
 
 # The pipeline records these numbers; reproducing them proves the harness.
 ANCHORS = {
@@ -191,29 +191,9 @@ def main():
             sys.stdout.flush()
         del built
 
-    lines = ['# 指纹在骨架划分下的折内消融', '',
-             '骨架五折位置取自 `experiments\\20261014_S-M\\models\\S-M\\prepared_data.pkl`（train 1118/1123/1120/1085/1086）；',
-             '这些位置是相对**训练子集**（1383 行）的索引，折内矩阵由 `core/train_optimizer.py` 的',
-             '`fit_preprocessing` / `transform_features` 在该子集上重建，与管线评分口径一致',
-             '（折内标准化 y 上拟合，反标准化回 eV 后再评分）。', '',
-             '主指标是**五折合并后**的 CV MSE / CV R²：骨架划分各折的 y_valid 方差差很多',
-             '（sd 0.31–1.62 eV），逐折 MSE 取平均会主要反映这种方差差异而不是预测力。',
-             '`fold-R² 均值` 仅作参考。', '',
-             '锚点校验：仅 Mordred 配置的 Lasso 复现管线上报的 CV MSE = 0.6191693213237417（容差 5e-3，',
-             '因为 Mordred 描述符跨次重算只有 93.96% 逐位相同）。', '',
-             '| 特征配置 | 原始列数 | 折内保留 | 模型 | 合并 CV MSE | 合并 CV R² | fold-R² 均值 |',
-             '|---|---|---|---|---|---|---|']
-    for r in rows:
-        lines.append('| %s | %d | %d | %s | %.4f | %+.4f | %+.4f |'
-                     % (r['config'], r['raw_cols'], r['kept'], r['model'],
-                        r['cv_mse'], r['cv_r2'], r['fold_r2_mean']))
-    lines += ['', '三个模型用的都是 S-M 运行自己调出的最优超参（Lasso alpha=0.0070375/max_iter=7151，',
-              'RandomForest n_estimators=32/max_depth=8；SVR 用 R-M 修正空间最优点 C=912.3/gamma=3.5e-4，',
-              '因为 S-M 自己调出的 SVR 落在旧搜索空间的边界上），未在每个特征配置上重调，',
-              '只用于横向比较配置之间的相对变化。']
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text('\n'.join(lines) + '\n', encoding='utf-8')
-    print('\nwrote %s' % OUT)
+    pd.DataFrame(rows).rename(columns={'cv_mse': 'pooled_cv_mse', 'cv_r2': 'pooled_cv_r2', 'kept': 'kept_fold0'}).to_csv(OUT, index=False, encoding='utf-8-sig')
+    print(OUT)
 
 
 if __name__ == '__main__':
